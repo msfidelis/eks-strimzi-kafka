@@ -38,7 +38,7 @@ variable "kafka_scale_options" {
 }
 
 #######################################
-### observability CAPACITY CONFIGS  ###
+### OBSERVABILITY CAPACITY CONFIGS  ###
 #######################################
 
 variable "observability_instances_sizes" {
@@ -49,6 +49,26 @@ variable "observability_instances_sizes" {
 }
 
 variable "observability_scale_options" {
+  description = "Configuration for the EKS cluster auto-scaling. It includes the minimum (min), maximum (max), and desired (desired) number of worker nodes."
+  default = {
+    min     = 2
+    max     = 2
+    desired = 2
+  }
+}
+
+#######################################
+###    GENERAL CAPACITY CONFIGS     ###
+#######################################
+
+variable "general_instances_sizes" {
+  description = "A list of EC2 instance types to use for the EKS worker nodes. These instance types should balance between cost, performance, and resource requirements for your workload."
+  default = [
+    "t3.large"
+  ]
+}
+
+variable "general_scale_options" {
   description = "Configuration for the EKS cluster auto-scaling. It includes the minimum (min), maximum (max), and desired (desired) number of worker nodes."
   default = {
     min     = 2

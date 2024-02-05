@@ -23,8 +23,8 @@ resource "aws_eks_node_group" "kafka" {
   }
 
   tags = {
-    "Name": format("%s-kafka-brokers", aws_eks_cluster.main.name)
-    "kubernetes.io/cluster/${var.cluster_name}"     = "owned"
+    "Name" : format("%s-kafka-brokers", aws_eks_cluster.main.name)
+    "kubernetes.io/cluster/${var.cluster_name}" = "owned"
   }
 
   lifecycle {

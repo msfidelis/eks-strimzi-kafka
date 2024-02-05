@@ -1,7 +1,7 @@
-resource "aws_eks_node_group" "observability" {
+resource "aws_eks_node_group" "general" {
 
   cluster_name    = aws_eks_cluster.main.name
-  node_group_name = format("%s-observability-brokers", aws_eks_cluster.main.name)
+  node_group_name = format("%s-general", aws_eks_cluster.main.name)
   node_role_arn   = aws_iam_role.eks_nodes_roles.arn
 
   subnet_ids = [
@@ -10,20 +10,20 @@ resource "aws_eks_node_group" "observability" {
     aws_subnet.private_subnet_1c.id
   ]
 
-  instance_types = var.observability_instances_sizes
+  instance_types = var.general_instances_sizes
 
   scaling_config {
-    desired_size = lookup(var.observability_scale_options, "desired")
-    max_size     = lookup(var.observability_scale_options, "max")
-    min_size     = lookup(var.observability_scale_options, "min")
+    desired_size = lookup(var.general_scale_options, "desired")
+    max_size     = lookup(var.general_scale_options, "max")
+    min_size     = lookup(var.general_scale_options, "min")
   }
 
   labels = {
-    NodeGroupType = "observability"
+    NodeGroupType = "general"
   }
 
   tags = {
-    "Name" : format("%s-observability-brokers", aws_eks_cluster.main.name)
+    "Name" : format("%s-general-brokers", aws_eks_cluster.main.name)
     "kubernetes.io/cluster/${var.cluster_name}" = "owned"
   }
 
