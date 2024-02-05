@@ -37,10 +37,37 @@ variable "kafka_scale_options" {
   }
 }
 
+#######################################
+###          KAFKA CONFIGS          ###
+#######################################
 
-###############################
-### KAFKA CAPACITY CONFIGS  ###
-###############################
+variable "kafka_nlb_ingress_type" {
+  type    = string
+  default = "network"
+}
+
+variable "kafka_nlb_ingress_internal" {
+  type    = string
+  default = "false"
+}
+
+variable "kafka_nlb_ingress_enable_termination_protection" {
+  type        = bool
+  description = "Determines if termination protection is enabled for the Network Load Balancer, preventing accidental deletion."
+  default     = false
+}
+
+variable "kafka_enable_cross_zone_load_balancing" {
+  type        = bool
+  description = "Controls whether cross-zone load balancing is enabled for the Network Load Balancer, allowing even traffic distribution across all zones."
+  default     = false
+}
+
+
+
+###################################
+### ZOOKEEPER CAPACITY CONFIGS  ###
+###################################
 
 variable "zookeeper_instances_sizes" {
   description = "A list of EC2 instance types to use for the EKS worker nodes. These instance types should balance between cost, performance, and resource requirements for your workload."
@@ -52,9 +79,9 @@ variable "zookeeper_instances_sizes" {
 variable "zookeeper_scale_options" {
   description = "Configuration for the EKS cluster auto-scaling. It includes the minimum (min), maximum (max), and desired (desired) number of worker nodes."
   default = {
-    min     = 2
-    max     = 2
-    desired = 2
+    min     = 3
+    max     = 3
+    desired = 3
   }
 }
 
