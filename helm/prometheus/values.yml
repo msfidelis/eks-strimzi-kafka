@@ -18,6 +18,8 @@ alertmanager:
 grafana:
   nodeSelector:
     NodeGroupType: observability
+  service:
+    type: NodePort    
 
 kubeStateMetrics:
   nodeSelector:

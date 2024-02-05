@@ -71,6 +71,27 @@ data "aws_iam_policy_document" "csi_driver" {
 
   }
 
+  statement {
+
+    effect = "Allow"
+    actions = [
+      "ec2:CreateVolume",
+      "ec2:DeleteVolume",
+      "ec2:DetachVolume",
+      "ec2:AttachVolume",
+      "ec2:DescribeInstances",
+      "ec2:CreateTags",
+      "ec2:DeleteTags",
+      "ec2:DescribeTags",
+      "ec2:DescribeVolumes"
+    ]
+
+    resources = [
+      "*"
+    ]
+
+  }
+
 }
 
 resource "aws_iam_policy" "csi_driver" {

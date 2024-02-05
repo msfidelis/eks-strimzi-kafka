@@ -24,7 +24,7 @@ variable "k8s_version" {
 variable "kafka_instances_sizes" {
   description = "A list of EC2 instance types to use for the EKS worker nodes. These instance types should balance between cost, performance, and resource requirements for your workload."
   default = [
-    "c5.large"
+    "c6a.2xlarge"
   ]
 }
 
@@ -77,6 +77,33 @@ variable "observability_scale_options" {
     desired = 2
   }
 }
+
+#######################################
+###     OBSERVABILITY CONFIGS       ###
+#######################################
+
+variable "prometheus_nlb_ingress_type" {
+  type    = string
+  default = "network"
+}
+
+variable "prometheus_nlb_ingress_internal" {
+  type    = string
+  default = "false"
+}
+
+variable "prometheus_nlb_ingress_enable_termination_protection" {
+  type        = bool
+  description = "Determines if termination protection is enabled for the Network Load Balancer, preventing accidental deletion."
+  default     = false
+}
+
+variable "prometheus_enable_cross_zone_load_balancing" {
+  type        = bool
+  description = "Controls whether cross-zone load balancing is enabled for the Network Load Balancer, allowing even traffic distribution across all zones."
+  default     = false
+}
+
 
 #######################################
 ###    GENERAL CAPACITY CONFIGS     ###
