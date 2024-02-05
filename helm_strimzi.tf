@@ -7,12 +7,6 @@ resource "helm_release" "strimzi" {
   namespace        = "strimzi"
   create_namespace = true
 
-
-  values = [
-    "${file("./helm/kafka/values.yml")}"
-  ]
-
-
   depends_on = [
     aws_eks_cluster.main,
     aws_eks_node_group.observability,
