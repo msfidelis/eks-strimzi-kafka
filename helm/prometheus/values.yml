@@ -1,0 +1,32 @@
+prometheus:
+  prometheusSpec:
+    podMonitorSelector: {}
+    podMonitorSelectorNilUsesHelmValues: false
+    ruleSelector: {}
+    ruleSelectorNilUsesHelmValues: false
+    serviceMonitorSelector: {}
+    serviceMonitorSelectorNilUsesHelmValues: false
+
+    nodeSelector:
+      NodeGroupType: observability
+
+alertmanager:
+  alertmanagerSpec:
+    nodeSelector:
+      NodeGroupType: observability
+
+grafana:
+  nodeSelector:
+    NodeGroupType: observability
+
+kubeStateMetrics:
+  nodeSelector:
+    NodeGroupType: observability
+
+prometheusOperator:
+  enabled: true
+  namespaces: ''
+  denyNamespaces: ''
+  prometheusInstanceNamespaces: ''
+  alertmanagerInstanceNamespaces: ''
+  thanosRulerInstanceNamespaces: ''
