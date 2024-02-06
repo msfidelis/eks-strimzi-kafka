@@ -5,7 +5,7 @@
 
 # Project Diagram
 
-[Arquitetura](/docs/diagram.png)
+![Arquitetura](/docs/diagram.png)
 
 ## Requirements
 
