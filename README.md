@@ -7,9 +7,20 @@
 
 ![Arquitetura](/docs/diagram.png)
 
-### Resources
+### Deploy
+
+```bash
+terraform init
+terraform apply --auto-approve
+```
 
 ![Resources](/docs/setup.png)
+
+### Cleanup
+
+```bash
+terraform destroy --auto-approve
+```
 
 ## Requirements
 
