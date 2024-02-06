@@ -11,10 +11,18 @@ resource "kubectl_manifest" "configmap" {
 }
 
 resource "kubectl_manifest" "kafka" {
-  yaml_body = templatefile("${path.module}/helm/kafka/kafka.yml", {})
+  yaml_body = templatefile("${path.module}/helm/kafka/kafka.yml", {
+    ZOOKEEPER_DESIRED_REPLICAS = var.zookeeper_desired_replicas,
+    ZOOKEEPER_REQUEST_MEMORY   = var.zookeeper_request_memory,
+    ZOOKEEPER_LIMIT_MEMORY     = var.zookeeper_limit_memory
+    ZOOKEEPER_REQUEST_CPU      = var.zookeeper_request_cpu,
+    ZOOKEEPER_LIMIT_CPU        = var.zookeeper_limit_cpu,
+    ZOOKEEPER_STORAGE_SIZE     = var.zookeeper_storage_size,
+    ZOOKEEPER_STORAGE_CLASS    = var.zookeeper_storage_class,
+  })
 
   depends_on = [
-    aws_lb.kafka
+    aws_lb.kafka,
   ]
 
 }

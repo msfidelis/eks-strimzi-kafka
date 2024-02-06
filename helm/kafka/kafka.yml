@@ -74,11 +74,11 @@ spec:
     rack:
       topologyKey: topology.kubernetes.io/zone
   zookeeper:
-    replicas: 3
+    replicas: ${ZOOKEEPER_DESIRED_REPLICAS}
     storage:
       type: persistent-claim
-      size: 10Gi
-      class: gp2
+      size: ${ZOOKEEPER_STORAGE_SIZE}
+      class: ${ZOOKEEPER_STORAGE_CLASS}
       deleteClaim: true
     metricsConfig:
       type: jmxPrometheusExporter
