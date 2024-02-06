@@ -5,3 +5,7 @@
 # Project Diagram
 
 ![Arquitetura](/docs/diagram.png)
+
+### Resources 
+
+![Resources](/docs/setup.png)

@@ -7,6 +7,10 @@
 
 ![Arquitetura](/docs/diagram.png)
 
+### Resources
+
+![Resources](/docs/setup.png)
+
 ## Requirements
 
 | Name | Version |
