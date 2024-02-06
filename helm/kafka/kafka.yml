@@ -7,7 +7,7 @@ metadata:
 spec:
   kafka:
     version: 3.6.0
-    replicas: 4
+    replicas: ${KAFKA_DESIRED_REPLICAS}
     listeners:
       - name: plain
         port: 9092
@@ -24,31 +24,31 @@ spec:
         authentication:
           type: tls        
     config:
-      offsets.topic.replication.factor: 3
-      transaction.state.log.replication.factor: 3
+      offsets.topic.replication.factor: ${KAFKA_REPLICATION_FACTOR}
+      transaction.state.log.replication.factor: ${KAFKA_REPLICATION_FACTOR}
       transaction.state.log.min.isr: 2
-      default.replication.factor: 3
-      min.insync.replicas: 2
+      default.replication.factor: ${KAFKA_REPLICATION_FACTOR}
+      min.insync.replicas: ${KAFKA_MIN_INSYNC_REPLICAS}
       inter.broker.protocol.version: "3.6"
-      socket.request.max.bytes: 2147483647
+      socket.request.max.bytes: ${KAFKA_REQUEST_MAX_BYTES}
     resources:
       requests:
-        memory: 8Gi
-        cpu: "2"
+        memory: ${KAFKA_REQUEST_MEMORY}
+        cpu: ${KAFKA_REQUEST_CPU}
       limits:
-        memory: 16Gi
-        cpu: "2"
+        memory: ${KAFKA_LIMIT_MEMORY}
+        cpu: ${KAFKA_LIMIT_CPU}
     jvmOptions:
-      "-Xmx": "6g"
-      "-Xms": "4g"
+      "-Xmx": "${KAFKA_XMX}"
+      "-Xms": "${KAFKA_XMS}"
     storage:
       type: jbod
       volumes:
         - id: 0
           type: persistent-claim
-          size: 10Gi # 1000Gi
-          class: gp2
-          deleteClaim: false
+          size: "${KAFKA_STORAGE_SIZE}" # 1000Gi
+          class: ${KAFKA_STORAGE_CLASS}
+          deleteClaim: true
     template:
       pod:
         tolerations:
